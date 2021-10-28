@@ -8,7 +8,7 @@ node {
        }           
       
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'git') {
+        docker.withRegistry('https://registry.hub.docker.com', 'semyonb20') {
             app.push("${env.BUILD_NUMBER}")            
             app.push("latest")        
         }    
