@@ -13,4 +13,4 @@ COPY --from=stage1 /home/npm/src/node-hello/index.js  .
 COPY --from=stage1 /home/npm/src/node-hello/package.json  .
 ENTRYPOINT [ "npm" ]
 CMD [ "start" ]   
-EXPOSE 8080 
+EXPOSE 3000 
