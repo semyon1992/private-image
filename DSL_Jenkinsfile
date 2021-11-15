@@ -1,32 +1,32 @@
 pipeline {
-    agent any
-    parameters{
-        string(name: 'REPO', defaultValue: 'https://github.com/semyon1992/private-image.git', description: 'Link to git repo that should be cloned')
-        string(name: 'BRANCH', defaultValue: 'https://github.com/semyon1992/private-image.git', description: 'Link to git repo that should be cloned')
-        string(name: 'TAG',  defaultValue: 'v0.1a', description: 'tag ro docker cintainer')
-        string(name: 'REGISTRY_CREDENTIALS', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is ised to push docker image')
+  agent any
+  parameters {
+    string(name: 'REPO', defaultValue: 'https://github.com/semyon1992/private-image.git', description: 'Link to git repo that should be cloned')
+    string(name: 'BRANCH', defaultValue: 'https://github.com/semyon1992/private-image.git', description: 'Link to git repo that should be cloned')
+    string(name: 'TAG', defaultValue: 'v0.1a', description: 'tag ro docker cintainer')
+    string(name: 'REGISTRY_CREDENTIALS', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is ised to push docker image')
+
+  }
+  stages {
+    stage('Clone git repo') {
+      steps {
+        git branch: "${params.BRANCH}", url: "${params.GITURL}"
+      }
+    }
+    stage('Build Image') {
+      steps {
+        app = docker.build("semyonb20/jsapp")
+      }
 
     }
-    stages {
-        stage('Clone git repo') {
-            steps{
-                git branch: "${params.BRANCH}", url: "${params.GITURL}"
-            }
+    stage('Push image') {
+      steps {
+        docker.withRegistry('https://registry.hub.docker.com', "${params.BRANCH}") {
+          app.push("${env.BUILD_NUMBER}")
+          app.push("latest")
         }
-        stage('Build Image') {
-            steps {
-                app = docker.build("semyonb20/jsapp")    
-            }
-            
-        }
-        stage('Push image') {
-            steps {
-                    docker.withRegistry('https://registry.hub.docker.com', "${params.BRANCH}") {
-                    app.push("${env.BUILD_NUMBER}")            
-                    app.push("latest")     
-               }
-            
-            }
-        }
+
+      }
     }
+  }
 }
