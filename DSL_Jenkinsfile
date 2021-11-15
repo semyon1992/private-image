@@ -21,11 +21,12 @@ pipeline {
         }
         stage('Push image') {
             steps {
-               docker.withRegistry('https://registry.hub.docker.com', "${params.BRANCH}") {
-               app.push("${env.BUILD_NUMBER}")            
-               app.push("latest")     
-            }
+                    docker.withRegistry('https://registry.hub.docker.com', "${params.BRANCH}") {
+                    app.push("${env.BUILD_NUMBER}")            
+                    app.push("latest")     
+               }
             
+            }
         }
     }
 }
