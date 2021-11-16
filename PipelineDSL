@@ -5,6 +5,8 @@
          stringParam('BRANCH', 'main', 'Link to git repo that should be cloned')
          stringParam('TAG', 'v0.1a', 'tag ro docker cintainer')
          stringParam('DockerCred', 'semyonb20', 'credential name from jenkins secrets that is ised to push docker image')
+         stringParam('NodeJsVersion', '12', 'NodeJsVersion')
+
 
      }
 
@@ -19,14 +21,9 @@
      }
 
      steps {
-         dockerBuildAndPublish {
-             repositoryName('semyonb20/jsapp')
-             //tag("${TAG}")
-             registryCredentials("${DockerCred}")
-             //forcePull(false)
-             createFingerprints(false)
-             skipDecorate()
-         }
+        shell("echo 'a first step' \$TAG")
+        shell("docker build -t \$TAG .    --build-arg  NODE_VERSION=\$NodeJsVersion --no-cache")
+         
 
      }
  }
