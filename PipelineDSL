@@ -21,9 +21,17 @@
      }
 
      steps {
-        shell("echo 'a first step' \$TAG")
-        shell("docker build -t \$TAG .    --build-arg  NODE_VERSION=\$NodeJsVersion --no-cache")
-         
+         dockerBuildAndPublish {
+            repositoryName('semyonb20/jsapp')
+            additionalBuildArgs("--build-arg  NODE_VERSION=\$NodeJsVersion")
+            tag("\$TAG")
+            forceTag(false)
+            registryCredentials('semyonb20')
+            forcePull(false)
+            createFingerprints(false)
+            skipDecorate()
+        }
+
 
      }
  }
