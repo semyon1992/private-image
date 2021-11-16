@@ -5,7 +5,6 @@ pipeline {
         string(name: 'DockerCred', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is used to push docker image')
         string(name: 'NodeJsVersion', defaultValue: '12', description: 'Node js version supported values: https://hub.docker.com/_/node')
     }
-    def app
     stages {
         stage('Clone repository') {
             steps {
@@ -20,7 +19,7 @@ pipeline {
                 echo "Biography: ${params.DockerCred}"
                 echo "Toggle: ${params.NodeJsVersion}"
                 //app = docker.build("semyonb20/jsapp")
-                app=docker.build("semyonb20/jsapp")
+                 docker.build("semyonb20/jsapp")
                 //additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
                  
             }
