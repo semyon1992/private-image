@@ -15,9 +15,7 @@ pipeline {
             
             steps {
                 script {
-                    docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
-                    .withRegistry('https://registry.hub.docker.com', 'semyonb20')
-                    .push("${params.TAG}").push("latest")
+                    docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .").withRegistry('https://registry.hub.docker.com', 'semyonb20').push("${params.TAG}").push("latest")
                 }
             }
         }
