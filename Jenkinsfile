@@ -11,6 +11,19 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Build image') {
+            steps {
+                //app = docker.build("semyonb20/jsapp")
+
+
+                docker.build("semyonb20/jsapp", "--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
+
+                //additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
+            }
+        }
+
+
+
         stage('Example') {
 
             steps {
