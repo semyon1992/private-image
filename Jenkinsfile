@@ -18,8 +18,9 @@ pipeline {
                  echo "Hello ${params.TAG}"
                 echo "Biography: ${params.DockerCred}"
                 echo "Toggle: ${params.NodeJsVersion}"
-                //app = docker.build("semyonb20/jsapp")
-                 docker.build("semyonb20/jsapp")
+                sh "docker build -t jsapp:${params.TAG} .    --build-arg  NODE_VERSION=${params.NodeJsVersion} --no-cache"
+                ////app = docker.build("semyonb20/jsapp")
+                // docker.build("semyonb20/jsapp")
                 //additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
                  
             }
