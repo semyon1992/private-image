@@ -1,6 +1,7 @@
-def app
+
 pipeline {
     agent any
+    def app
     parameters {
         string(name: 'TAG', defaultValue: 'v0.1a', description: 'tag for docker container')
         string(name: 'DockerCred', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is used to push docker image')
@@ -18,7 +19,7 @@ pipeline {
                 script {
                     
                     app = docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
-                    docker.withRegistry('https://registry.hub.docker.com', 'semyonb20'){
+                    docker.withRegistry('https://registry.hub.docker.com', "${params.DockerCred}"){
                     app.push("${params.TAG}")
                     app.push("latest")
                     }
