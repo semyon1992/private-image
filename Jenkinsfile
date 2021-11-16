@@ -5,6 +5,7 @@ pipeline {
         string(name: 'DockerCred', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is used to push docker image')
         string(name: 'NodeJsVersion', defaultValue: '12', description: 'Node js version supported values: https://hub.docker.com/_/node')
     }
+    def app
     stages {
         stage('Clone repository') {
             steps {
@@ -12,7 +13,7 @@ pipeline {
             }
         }
         stage('Build image') {
-            def app
+            
             steps {
                    
                  echo "Hello ${params.TAG}"
