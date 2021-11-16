@@ -33,3 +33,15 @@ docker ps
 CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS                                                 NAMES
 a8eea7bb89ac   jsapp     "npm start"   8 minutes ago   Up 8 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp, 8080/tcp   jsapp
 </code></pre>
+
+
+# Jenkins DSL 
+## You can use PipelineDSL file to automate image building with jenkins
+<pre>
+ REPO:   https://github.com/semyon1992/private-image.git
+ BRANCH: main
+ TAG: v0.1a)
+ DockerCred: CredName
+ NodeJsVersion: can accept any tag from https://hub.docker.com/_/node
+</pre>
+         
