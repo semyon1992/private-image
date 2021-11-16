@@ -1,0 +1,32 @@
+ job("Seed_Job") {
+
+     parameters {
+         stringParam('REPO', 'https://github.com/semyon1992/private-image.git', 'Link to git repo that should be cloned')
+         stringParam('BRANCH', 'main', 'Link to git repo that should be cloned')
+         stringParam('TAG', 'v0.1a', 'tag ro docker cintainer')
+         stringParam('DockerCred', 'semyonb20', 'credential name from jenkins secrets that is ised to push docker image')
+
+     }
+
+     scm {
+         git {
+             branch("\$BRANCH")
+             remote {
+                 name("origin")
+                 url("\$REPO")
+             }
+         }
+     }
+
+     steps {
+         dockerBuildAndPublish {
+             repositoryName('semyonb20/jsapp')
+             //tag("${TAG}")
+             registryCredentials("${DockerCred}")
+             //forcePull(false)
+             createFingerprints(false)
+             skipDecorate()
+         }
+
+     }
+ }
