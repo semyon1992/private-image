@@ -1,22 +1,20 @@
  job("Seed_Job") {
+
      parameters {
-         string(name: 'TAG', defaultValue: 'v0.1a', description: 'tag for docker container')
-         string(name: 'DockerCred', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is used to push docker image')
-         string(name: 'NodeJsVersion', defaultValue: 'semyonb20', description: 'Node js version supported values: https://hub.docker.com/_/node')
-     }  
- 
+         stringParam('TAG', 'v0.1a', 'tag ro docker cintainer')
+         stringParam('DockerCred', 'semyonb20', 'credential name from jenkins secrets that is ised to push docker image')
+         stringParam('NodeJsVersion', '12', 'NodeJsVersion')
+     }
      steps {
          dockerBuildAndPublish {
-             repositoryName('semyonb20/jsapp')
-             additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
-             tag(${params.TAG})
-             forceTag(false)
-             registryCredentials(${params.DockerCred})
-             forcePull(false)
-             createFingerprints(false)
-             skipDecorate()
-         }
-
-
-     }
+            repositoryName('semyonb20/jsapp')
+            additionalBuildArgs("--build-arg  NODE_VERSION=\$NodeJsVersion")
+            tag("\$TAG")
+            forceTag(false)
+            registryCredentials('semyonb20')
+            forcePull(false)
+            createFingerprints(false)
+            skipDecorate()
+        }
+    }
  }
