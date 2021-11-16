@@ -1,3 +1,4 @@
+def app
 pipeline {
     agent any
     parameters {
@@ -15,7 +16,7 @@ pipeline {
             
             steps {
                 script {
-                    def app
+                    
                     app = docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
                     docker.withRegistry('https://registry.hub.docker.com', 'semyonb20')
                     app = docker.push("${params.TAG}")
