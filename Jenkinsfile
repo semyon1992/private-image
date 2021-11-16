@@ -25,13 +25,5 @@ pipeline {
                 }
             }
         }
-        stage('Example') {
-
-            steps {
-                echo "Hello ${params.TAG}"
-                echo "Biography: ${params.DockerCred}"
-                echo "Toggle: ${params.NodeJsVersion}"
-            }
-        }
     }
 }
