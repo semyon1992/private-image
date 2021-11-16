@@ -12,8 +12,9 @@ pipeline {
             }
         }
         stage('Build image') {
+            def app
             steps {
-                def app   
+                   
                  echo "Hello ${params.TAG}"
                 echo "Biography: ${params.DockerCred}"
                 echo "Toggle: ${params.NodeJsVersion}"
