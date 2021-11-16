@@ -13,25 +13,25 @@ pipeline {
             }
         }
         stage('Build image') {
-
+            
             steps {
                 script {
-
+                    
                     app = docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
-                    docker.withRegistry('https://registry.hub.docker.com', 'semyonb20') {}
+                    docker.withRegistry('https://registry.hub.docker.com', 'semyonb20'){
                     app = docker.push("${params.TAG}")
                     app = docker.push("latest")
+                    }
                 }
             }
         }
-    }
-    stage('Example') {
+        stage('Example') {
 
-        steps {
-            echo "Hello ${params.TAG}"
-            echo "Biography: ${params.DockerCred}"
-            echo "Toggle: ${params.NodeJsVersion}"
+            steps {
+                echo "Hello ${params.TAG}"
+                echo "Biography: ${params.DockerCred}"
+                echo "Toggle: ${params.NodeJsVersion}"
+            }
         }
     }
-}
 }
