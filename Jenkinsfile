@@ -13,9 +13,11 @@ pipeline {
         }
         stage('Build image') {
             steps {
+                step{
                 //app = docker.build("semyonb20/jsapp")
                 app = docker.build("semyonb20/jsapp", "--build-arg  NODE_VERSION=12 .")
                 //additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
+                }
             }
         }
 
