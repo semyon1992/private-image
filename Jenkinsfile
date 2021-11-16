@@ -14,25 +14,13 @@ pipeline {
         stage('Build image') {
             
             steps {
-                   
-                 echo "Hello ${params.TAG}"
-                echo "Biography: ${params.DockerCred}"
-                echo "Toggle: ${params.NodeJsVersion}"
-                //sh "docker build -t jsapp:${params.TAG} .    --build-arg  NODE_VERSION=${params.NodeJsVersion} --no-cache"
-                //sh "docker images"
-                //sh "docker login -u="semyonb20" -p='Asdfqazx324465!@#' " 
-                //app = docker.build("semyonb20/jsapp")
-                
                 script {
                     docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
+                    .withRegistry('https://registry.hub.docker.com', 'semyonb20')
+                    .push("${params.TAG}").push("latest")
                 }
-                // docker.build("semyonb20/jsapp")
-                //additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
-                 
             }
         }
-
-
         stage('Example') {
 
             steps {
