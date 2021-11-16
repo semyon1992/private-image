@@ -16,10 +16,10 @@ pipeline {
             steps {
                 script {
                     def app
-                    docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
+                    app = docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
                     docker.withRegistry('https://registry.hub.docker.com', 'semyonb20')
-                    docker.push("${params.TAG}")
-                    docker.push("latest")
+                    app = docker.push("${params.TAG}")
+                    app = docker.push("latest")
                 }
             }
         }
