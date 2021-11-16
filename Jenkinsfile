@@ -8,11 +8,7 @@ pipeline {
         string(name: 'NodeJsVersion', defaultValue: '12', description: 'Node js version supported values: https://hub.docker.com/_/node')
     }
     stages {
-        stage('Clone repository') {
-            steps {
-                checkout scm
-            }
-        }
+         
         stage('Build image') {
             
             steps {
