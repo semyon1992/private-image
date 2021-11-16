@@ -1,7 +1,7 @@
-
+def app
 pipeline {
     agent any
-    def app
+    
     parameters {
         string(name: 'TAG', defaultValue: 'v0.1a', description: 'tag for docker container')
         string(name: 'DockerCred', defaultValue: 'semyonb20', description: 'credential name from jenkins secrets that is used to push docker image')
