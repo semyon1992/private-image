@@ -24,7 +24,7 @@ pipeline {
                 //app = docker.build("semyonb20/jsapp")
                 
                 script {
-                    docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion}")
+                    docker.build("semyonb20/jsapp:${params.TAG}", "--build-arg  NODE_VERSION=${params.NodeJsVersion} .")
                 }
                 // docker.build("semyonb20/jsapp")
                 //additionalBuildArgs("--build-arg  NODE_VERSION=\${params.NodeJsVersion}")
