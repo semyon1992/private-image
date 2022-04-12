@@ -1,7 +1,7 @@
 ARG NODE_VERSION=latest
 FROM node:${NODE_VERSION} as stage1
 WORKDIR /home/npm/src
-RUN git clone  https://github.com/johnpapa/node-hello.git
+RUN ls -lah
 COPY . . 
 
 
